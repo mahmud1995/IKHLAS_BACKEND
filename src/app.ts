@@ -9,7 +9,7 @@ const app = express();
  * ------ MIDDLEWARE PARSES ------
  * express.static: Express to serve static files (like images, CSS, JavaScript) from the public folder.
  * - like public/logo.png, it will be accessible at: http://localhost:PORT/logo.png
- * express.statis(): public ==> static folderga aylantiramiz
+ * express.static(): public ==> static folderga aylantiramiz
  * express.urlencoded(): helps Express read and convert form data into a JavaScript object
  */
 app.use(express.static(path.join(__dirname, "public")));
@@ -29,8 +29,9 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 /** 4 - ROUTE
  */
-app.use("/admin", routerAdmin);
+// Middleware Design Pattern
 app.use("/", router);
+app.use("/admin", routerAdmin);
 
 const server = http.createServer(app);
 
