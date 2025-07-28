@@ -1,14 +1,17 @@
-import { Request, Response } from "express";
+import express, { Request, Response } from "express";
+
 interface T {
   [key: string]: any;
 }
+
 const memberController: T = {};
-memberController.getMember = (req: Request, res: Response) => {
+
+memberController.goHome = (req: Request, res: Response) => {
   try {
-    console.log("memberController: Get Member");
-    res.send("you are entered to get member page");
+    console.log("goHome");
+    res.send("");
   } catch (error) {
-    console.log(`Failed to fetch Member data`);
+    console.log("Failed to fetch goHome page", error);
   }
 };
 
