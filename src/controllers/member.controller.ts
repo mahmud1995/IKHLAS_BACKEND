@@ -4,9 +4,9 @@ interface T {
 }
 const memberController: T = {};
 memberController.getMember = (req: Request, res: Response) => {
-  console.log("memberController: Get Member");
   try {
-    res.send(alert("you are entered to get member page"));
+    console.log("memberController: Get Member");
+    res.send("you are entered to get member page");
   } catch (error) {
     console.log(`Failed to fetch Member data`);
   }
