@@ -3,25 +3,25 @@ import { T } from "../libs/types/common";
 
 const memberController: T = {};
 
-memberController.goHome = (req: Request, res: Response) => {
+memberController.goUserHome = (req: Request, res: Response) => {
   try {
-    console.log("goHome");
+    console.log("User goUserHome");
     res.send("User Home Page");
   } catch (err) {
     console.log("Error: goHome page", err);
   }
 };
-memberController.login = (req: Request, res: Response) => {
+memberController.userLogin = (req: Request, res: Response) => {
   try {
-    console.log("User login page");
+    console.log("User userLogin");
     res.send("User Login Page");
   } catch (err) {
     console.log("Error: login page", err);
   }
 };
-memberController.signup = (req: Request, res: Response) => {
+memberController.userSignup = (req: Request, res: Response) => {
   try {
-    console.log("User signup page");
+    console.log("User userSignup");
     res.send("User Signup Page");
   } catch (err) {
     console.log("Error: signup page", err);

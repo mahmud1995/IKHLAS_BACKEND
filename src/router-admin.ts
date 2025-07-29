@@ -1,5 +1,5 @@
 import express, { Request, Response } from "express";
-import memberController from "./controllers/member.controller";
+import restaurantController from "./controllers/restaurant.controller";
 /**
  * HERE WE ONLY CREATE "ENDPOINTS" OF ADMIN ROUTE
  * */
@@ -7,12 +7,14 @@ const routerAdmin = express.Router();
 /**
  * 1 Endpoint: To redirect Main(homepage)
  * */
-routerAdmin.get("/", memberController.goHome);
+routerAdmin.get("/", restaurantController.getAdminPage);
 /**
  * 2 Endpoint: Login
  * */
+routerAdmin.get("/login", restaurantController.getAdminLogin);
 /**
  * 3 Endpoint: SignUp
  * */
+routerAdmin.get("/signup", restaurantController.getAdminSignup);
 
 export default routerAdmin;

@@ -2,7 +2,7 @@ import express, { Request, Response } from "express";
 import memberController from "./controllers/member.controller";
 const router = express.Router();
 
-router.get("/", memberController.goHome);
-router.get("/login", memberController.login);
-router.get("/signup", memberController.signup);
+router.get("/", memberController.goUserHome);
+router.get("/login", memberController.userLogin);
+router.get("/signup", memberController.userSignup);
 export default router;
