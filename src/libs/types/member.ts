@@ -7,10 +7,10 @@ export interface Member {
   memberEmail: string;
   memberNickName: string;
   memberPhone: string;
-  memberPassword: string;
-  memberAddress: string;
-  memberDescription: string;
-  memberImage: string;
+  memberPassword?: string;
+  memberAddress?: string;
+  memberDescription?: string;
+  memberImage?: string;
   memberPoints: number;
   createdAt: Date;
   updatedAt: Date;
@@ -26,4 +26,8 @@ export interface MemberInput {
   memberDescription?: string;
   memberImage?: string;
   memberPoints?: number;
+}
+export interface LoginInput {
+  memberEmail: string; // must have
+  memberPassword: string; // must have
 }

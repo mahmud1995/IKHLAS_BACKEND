@@ -25,11 +25,10 @@ memberController.userLogin = (req: Request, res: Response) => {
 memberController.userSignup = async (req: Request, res: Response) => {
   try {
     console.log("User userSignup");
-    // const input: MemberInput = req.body,
-    //   result: Member = await memberService.signup(input);
-    const input: MemberInput = req.body;
-    console.log("req.body:", input);
+    const input: MemberInput = req.body,
+      result: Member = await memberService.signup(input);
     await res.status(200).json(input);
+    console.log("New User:", input);
   } catch (err) {
     console.log("Error: signup page", err);
   }

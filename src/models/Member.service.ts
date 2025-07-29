@@ -11,7 +11,7 @@ class MemberService {
     try {
       console.log("input:", input);
       const createdNewUser = await this.memberModel.create(input);
-
+      console.log("createdNewUser:", createdNewUser.toJSON());
       return createdNewUser.toObject();
     } catch (error) {
       console.log("Error on Signup member", error);
