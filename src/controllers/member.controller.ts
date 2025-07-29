@@ -2,6 +2,7 @@ import express, { Request, Response } from "express";
 import { T } from "../libs/types/common";
 import MemberService from "../models/Member.service";
 import { Member, MemberInput } from "../libs/types/member";
+import Errors, { HttpCode, Message } from "../libs/Error";
 
 const memberController: T = {};
 const memberService = new MemberService();
@@ -27,10 +28,10 @@ memberController.userSignup = async (req: Request, res: Response) => {
     console.log("User userSignup");
     const input: MemberInput = req.body,
       result: Member = await memberService.signup(input);
-    await res.status(200).json(input);
-    console.log("New User:", input);
+    await res.status(HttpCode.CREATED).json({ result });
   } catch (err) {
     console.log("Error: signup page", err);
+    res.status(Errors.standard.code).json(Errors.standard);
   }
 };
 /**
