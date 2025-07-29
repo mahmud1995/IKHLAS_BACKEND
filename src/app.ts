@@ -1,6 +1,6 @@
 import express from "express";
 import routerAdmin from "./router-admin";
-import router from "./router";
+import router from "./router-user";
 import path from "path";
 import http from "http";
 
