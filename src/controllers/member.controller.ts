@@ -1,8 +1,10 @@
 import express, { Request, Response } from "express";
 import { T } from "../libs/types/common";
 import MemberService from "../models/Member.service";
+import { Member, MemberInput } from "../libs/types/member";
 
 const memberController: T = {};
+const memberService = new MemberService();
 
 memberController.goUserHome = (req: Request, res: Response) => {
   try {
@@ -20,13 +22,38 @@ memberController.userLogin = (req: Request, res: Response) => {
     console.log("Error: login page", err);
   }
 };
-memberController.userSignup = (req: Request, res: Response) => {
+memberController.userSignup = async (req: Request, res: Response) => {
   try {
     console.log("User userSignup");
-    res.send("User Signup Page");
+    // const input: MemberInput = req.body,
+    //   result: Member = await memberService.signup(input);
+    const input: MemberInput = req.body;
+    console.log("req.body:", input);
+    await res.status(200).json(input);
   } catch (err) {
     console.log("Error: signup page", err);
   }
 };
+/**
+ * memberController.signup = async (req: Request, res:Response) => {
+    try {
+        console.log("signup");        
+        const input: MemberInput = req.body,
+            result: Member = await memberService.signup(input);
+        const token = await authService.createToken(result);
+            
+        res.cookie("accessToken", token, {
+            maxAge: AUTH_TIMER * 3600 * 1000, 
+            httpOnly: false,
+        })
 
+
+        res.status(HttpCode.CREATED).json({member: result, accessToken: token });
+    } catch (err) {
+        console.log("Error, signup:", err);
+        res.status(Errors.standard.code).json(Errors.standard);
+    }
+};
+ * 
+ * */
 export default memberController;
