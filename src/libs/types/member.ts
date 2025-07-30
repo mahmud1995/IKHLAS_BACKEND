@@ -1,7 +1,7 @@
-import { ObjectId } from "mongoose";
+import { Schema } from "mongoose";
 import { MemberType, MemberStatus } from "../enums/member.enum";
 export interface Member {
-  _id: ObjectId;
+  _id: Schema.Types.ObjectId;
   memberType: MemberType;
   memberStatus: MemberStatus;
   memberEmail: string;
