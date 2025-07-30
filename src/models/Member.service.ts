@@ -25,30 +25,38 @@ class MemberService {
     }
   }
 
-  // public async login(input: LoginInput): Promise<Member> {
-  //   const loggedUser = await this.memberModel
-  //     .findOne(
-  //       {
-  //         memberEmail: input.memberEmail,
-  //         memberStatus: { $ne: MemberStatus.DELETE },
-  //       },
-  //       { memberEmail: 1, memberPassword: 1, memberStatus: 1 }
-  //     )
-  //     .exec();
-  //   if (!loggedUser)
-  //     throw new Errors(HttpCode.NOT_FOUND, Message.NO_MEMBER_EMAIL);
-  //   else if (loggedUser.memberStatus === MemberStatus.BLOCK) {
-  //     throw new Errors(HttpCode.FORBIDDEN, Message.BLOCKED_USER);
-  //   }
-  //   const result = await this.memberModel
-  //     .findById(loggedUser._id)
-  //     .lean()
-  //     .exec();
-  //   if (!result) {
-  //     throw new Errors(HttpCode.NOT_FOUND, Message.NO_MEMBER_EMAIL);
-  //   }
-  //   return result;
-  // }
+  public async login(input: LoginInput): Promise<Member> {
+    const loggedUser = await this.memberModel
+      .findOne(
+        {
+          memberEmail: input.memberEmail,
+          memberStatus: { $ne: MemberStatus.DELETE },
+        },
+        { memberEmail: 1, memberPassword: 1, memberStatus: 1 }
+      )
+      .exec();
+    if (!loggedUser)
+      throw new Errors(HttpCode.NOT_FOUND, Message.NO_MEMBER_EMAIL);
+    else if (loggedUser.memberStatus === MemberStatus.BLOCK) {
+      throw new Errors(HttpCode.FORBIDDEN, Message.BLOCKED_USER);
+    }
+
+    const isPasswordValid = await bcrypt.compare(
+      input.memberPassword,
+      loggedUser.memberPassword
+    );
+    if (!isPasswordValid) {
+      throw new Errors(HttpCode.UNAUTHORIZED, Message.WRONG_PASSWORD);
+    }
+    const result = await this.memberModel
+      .findById(loggedUser._id)
+      .lean<Member>()
+      .exec();
+    if (!result) {
+      throw new Errors(HttpCode.NOT_FOUND, Message.NO_MEMBER_EMAIL);
+    }
+    return result;
+  }
 }
 
 export default MemberService;

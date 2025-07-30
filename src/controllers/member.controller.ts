@@ -1,7 +1,7 @@
 import express, { Request, Response } from "express";
 import { T } from "../libs/types/common";
 import MemberService from "../models/Member.service";
-import { Member, MemberInput } from "../libs/types/member";
+import { LoginInput, Member, MemberInput } from "../libs/types/member";
 import Errors, { HttpCode, Message } from "../libs/Error";
 
 const memberController: T = {};
@@ -15,10 +15,13 @@ memberController.goUserHome = (req: Request, res: Response) => {
     console.log("Error: goHome page", err);
   }
 };
-memberController.userLogin = (req: Request, res: Response) => {
+memberController.userLogin = async (req: Request, res: Response) => {
   try {
     console.log("User userLogin");
-    res.send("User Login Page");
+    // res.send("User Login Page");
+    const input: LoginInput = req.body,
+      result: Member = await memberService.login(input);
+    await res.status(HttpCode.OK).json({ member: result });
   } catch (err) {
     console.log("Error: login page", err);
   }
