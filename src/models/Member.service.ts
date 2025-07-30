@@ -4,6 +4,7 @@ import { LoginInput, Member, MemberInput } from "../libs/types/member";
 import MemberModel from "../schema/MemberSchema.model";
 import Errors, { HttpCode, Message } from "../libs/Error";
 import * as bcrypt from "bcryptjs";
+
 class MemberService {
   private readonly memberModel;
 
@@ -33,8 +34,10 @@ class MemberService {
           memberStatus: { $ne: MemberStatus.DELETE },
         },
         { memberEmail: 1, memberPassword: 1, memberStatus: 1 }
+        // set to 1 means include that fields, _id auto included
       )
       .exec();
+
     if (!loggedUser)
       throw new Errors(HttpCode.NOT_FOUND, Message.NO_MEMBER_EMAIL);
     else if (loggedUser.memberStatus === MemberStatus.BLOCK) {
