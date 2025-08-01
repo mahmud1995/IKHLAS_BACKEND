@@ -32,6 +32,7 @@ class MemberService {
         {
           memberEmail: input.memberEmail,
           memberStatus: { $ne: MemberStatus.DELETE },
+          // finds input memberEmail from all user's in db
         },
         { memberEmail: 1, memberPassword: 1, memberStatus: 1 }
         // set to 1 means include that fields, _id auto included
@@ -51,6 +52,7 @@ class MemberService {
     if (!isPasswordValid) {
       throw new Errors(HttpCode.UNAUTHORIZED, Message.WRONG_PASSWORD);
     }
+
     const result = await this.memberModel
       .findById(loggedUser._id)
       .lean<Member>()
