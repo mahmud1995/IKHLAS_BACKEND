@@ -85,20 +85,27 @@ async function runChores() {
 // #endregion 🧩 new Promise
 
 // #region Promise.allSettled
-// console.log("TRAIN new Promise and Promise.allSettled\n");
+console.log("TRAIN new Promise and Promise.allSettled\n");
 
-// async function checkAllFuncs(): Promise<any> {
-//   try {
-//     const result = await Promise.allSettled([
-//       myPromise1(),
-//       myPromise2(),
-//       myPromise3(),
-//     ]);
+async function checkAllFuncs(): Promise<any> {
+  try {
+    const result = await Promise.allSettled([
+      myPromise1(),
+      myPromise2(),
+      myPromise3(),
+    ]);
 
-//     console.log("Results from checkAllFuncs:", result);
-//     return result;
-//   } catch (error) {
-//     console.log("Error:", error);
-//     throw error;
-//   }
-// }
+    console.log("Results from checkAllFuncs:", result);
+    return result;
+  } catch (error) {
+    console.log("Error:", error);
+    throw error;
+  }
+}
+
+// Create a Promise
+function myPromise1(): Promise<string> {
+  return new Promise((resolve, reject) => {
+    setTimeout(resolve, 2000, "myPromise1 is ON");
+  });
+}
