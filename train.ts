@@ -70,3 +70,16 @@ readAllFuncs()
   .catch((error) => {
     console.error("💥 Something went wrong:", error);
   });
+
+// Method 2: Using async/await (recommended for TypeScript)
+async function runChores() {
+  console.log("\n=== Method 2: Using async/await ===");
+  try {
+    const results = await readAllFuncs();
+    console.log("🎉 All household chores are done!");
+    console.log("📝 Final results:", results);
+  } catch (error) {
+    console.error("💥 Something went wrong:", error);
+  }
+}
+// #endregion 🧩 new Promise
