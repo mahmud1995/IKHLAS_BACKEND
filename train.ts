@@ -32,3 +32,29 @@ function cleanKitchen(): Promise<string> {
     }, 3000);
   });
 }
+
+// Function - 3
+function startRobot(): Promise<string> {
+  console.log("🤖 Starting robot...");
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      console.log("🤖 Robot started!");
+      resolve("You started the Robot");
+    }, 500);
+  });
+}
+
+// Function - 4
+function throwTrash(): Promise<string> {
+  return new Promise((resolve) => {
+    const youCan = true;
+    setTimeout(() => {
+      if (youCan) {
+        console.log("You can throw the trash");
+        resolve("Succesfully threw out the trash");
+      } else {
+        console.log("It is not right time to throw out the Trash");
+      }
+    }, 500);
+  });
+}
