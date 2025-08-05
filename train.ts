@@ -1,4 +1,5 @@
 console.log("train test");
+// #region 🧩 new Promise
 async function readAllFuncs(): Promise<string[]> {
   console.log("🚀 Starting all tasks...");
 
@@ -58,3 +59,14 @@ function throwTrash(): Promise<string> {
     }, 500);
   });
 }
+
+// Method 1: Using .then()
+console.log("=== Method 1: Using .then() ===");
+readAllFuncs()
+  .then((values) => {
+    console.log("🎉 All household chores are done!");
+    console.log("📝 Final results:", values);
+  })
+  .catch((error) => {
+    console.error("💥 Something went wrong:", error);
+  });
