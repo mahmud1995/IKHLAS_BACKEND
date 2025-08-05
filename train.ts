@@ -127,3 +127,25 @@ function myPromise3() {
     }
   });
 }
+
+// Promise.allSettled
+
+Promise.allSettled([myPromise1(), myPromise2(), myPromise3()])
+  .then((results) => {
+    console.log("Direct Promise.allSettled results:", results);
+    // results.forEach((result, index) => {
+    //   if (result.status === "fulfilled") {
+    //     console.log(`Promise ${index + 1} fulfilled:`, result.value);
+    //   } else {
+    //     console.log(`Promise ${index + 1} rejected:`, result.reason);
+    //   }
+    // });
+  })
+  .catch((error) => {
+    console.log("error:", error);
+  });
+
+// Test the async function
+checkAllFuncs().then((results) => {
+  console.log("Async function completed");
+});
