@@ -109,3 +109,21 @@ function myPromise1(): Promise<string> {
     setTimeout(resolve, 2000, "myPromise1 is ON");
   });
 }
+
+// Create another Promise
+function myPromise2(): Promise<string> {
+  return new Promise((resolve, reject) => {
+    setTimeout(resolve, 1500, "myPromise2 is ON");
+  });
+}
+
+function myPromise3() {
+  return new Promise((resolve, reject) => {
+    let myProm = false;
+    if (myProm) {
+      resolve("myPromise3 is ON");
+    } else {
+      reject("NO myPromise3: myProm = false");
+    }
+  });
+}
