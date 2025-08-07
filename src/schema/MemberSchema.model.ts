@@ -1,5 +1,9 @@
 import mongoose, { Schema, Types } from "mongoose";
-import { MemberStatus, MemberType } from "../libs/enums/member.enum";
+import {
+  AuthProvider,
+  MemberStatus,
+  MemberType,
+} from "../libs/enums/member.enum";
 
 // Add OAuth fields to your existing MemberType interface
 export interface MemberTypes {
@@ -49,12 +53,16 @@ const memberSchema = new Schema(
     memberPhone: {
       type: String,
       index: { unique: true, sparse: true },
-      required: true,
+      required: function (this: any) {
+        return this.authProvider === AuthProvider.LOCAL;
+      },
     },
     memberPassword: {
       type: String,
       select: false,
-      required: true,
+      required: function (this: any) {
+        return this.authProvider === AuthProvider.LOCAL;
+      },
     },
     memberAddress: {
       type: String,
@@ -68,6 +76,19 @@ const memberSchema = new Schema(
     memberPoints: {
       type: Number,
       default: 0,
+    },
+
+    // Google OAuth fields
+    googleId: {
+      type: String,
+      sparse: true,
+      index: { unique: true, sparse: true },
+    },
+    authProvider: {
+      type: String,
+      enum: AuthProvider,
+      default: AuthProvider.GOOGLE,
+      required: true,
     },
   },
   { timestamps: true } // auto insert updateAt and createdAt to schema
