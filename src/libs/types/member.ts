@@ -1,5 +1,6 @@
 import { Types } from "mongoose";
-import { MemberType, MemberStatus } from "../enums/member.enum";
+import { MemberType, MemberStatus, AuthProvider } from "../enums/member.enum";
+
 export interface Member {
   _id: Types.ObjectId;
   memberType: MemberType;
@@ -14,6 +15,10 @@ export interface Member {
   memberPoints: number;
   createdAt: Date;
   updatedAt: Date;
+
+  // Google OAuth fields
+  googleId?: string;
+  authProvider: AuthProvider;
 }
 
 export interface MemberInput {
@@ -22,7 +27,7 @@ export interface MemberInput {
   memberEmail: string; // must have
   memberNickName: string; // Made required since schema requires it
   memberPhone: string; // Made required since schema requires it
-  memberPassword: string; // must have
+  memberPassword?: string; // optional for OAuth
   memberAddress?: string;
   memberDescription?: string;
   memberImage?: string;
@@ -31,4 +36,13 @@ export interface MemberInput {
 export interface LoginInput {
   memberEmail: string; // must have
   memberPassword: string; // must have
+}
+
+// New interface for Google OAuth user creaction
+export interface GoogleOAuthInput {
+  googleId: string;
+  memberEmail: string;
+  memberNickName: string;
+  memberImage?: string;
+  authProvider: AuthProvider.GOOGLE;
 }

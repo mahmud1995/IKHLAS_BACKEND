@@ -10,7 +10,7 @@ export enum MemberStatus {
   DELETE = "DELETED",
 }
 
-//
+// New enum for Authentication providers
 export enum AuthProvider {
   LOCAL = "LOCAL",
   GOOGLE = "GOOGLE",

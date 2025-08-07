@@ -54,9 +54,7 @@ const memberSchema = new Schema(
     memberPassword: {
       type: String,
       select: false,
-      required: function (this: MemberType) {
-        return this.provider;
-      },
+      required: true,
     },
     memberAddress: {
       type: String,
