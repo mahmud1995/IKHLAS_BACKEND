@@ -15,6 +15,7 @@ export interface Member {
   createdAt: Date;
   updatedAt: Date;
 }
+
 export interface MemberInput {
   memberType?: MemberType;
   memberStatus?: MemberStatus;
@@ -26,12 +27,6 @@ export interface MemberInput {
   memberDescription?: string;
   memberImage?: string;
   memberPoints?: number;
-
-  // OAuth fields
-  googleId?: string;
-  githubId?: string;
-  provider?: "local" | "google" | "github";
-  providerId?: string;
 }
 export interface LoginInput {
   memberEmail: string; // must have
