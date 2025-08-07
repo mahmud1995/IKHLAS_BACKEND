@@ -26,6 +26,12 @@ export interface MemberInput {
   memberDescription?: string;
   memberImage?: string;
   memberPoints?: number;
+
+  // OAuth fields
+  googleId?: string;
+  githubId?: string;
+  provider?: "local" | "google" | "github";
+  providerId?: string;
 }
 export interface LoginInput {
   memberEmail: string; // must have
