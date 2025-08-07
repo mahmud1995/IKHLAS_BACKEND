@@ -166,3 +166,30 @@ function getThem(theList: number[][]): number[][] {
   }
   return list1;
 }
+
+const theList = [
+  [4, 3],
+  [3, 4],
+  [5, 4],
+  [4, 0],
+];
+const result = getThem(theList);
+console.log("result:", result);
+
+function getThems(theLists: number[][]): number[][] {
+  const list2: number[][] = []; // closure
+  for (const x of theLists) {
+    if (x[1] == 3) {
+      list2.push(x);
+    }
+  }
+  return list2;
+}
+
+const theLists = [
+  [2, 3],
+  [3, 0],
+  [4, 3],
+];
+const result1 = getThems(theLists);
+console.log("result1:", result1);
