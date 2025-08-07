@@ -149,3 +149,20 @@ Promise.allSettled([myPromise1(), myPromise2(), myPromise3()])
 checkAllFuncs().then((results) => {
   console.log("Async function completed");
 });
+
+/**
+ * Create list of integer arrays
+ * Iterate over another list called TheList
+ * Filter out arrays whose first element (x[0]) equals 4
+ * Returns a new list containing only those arrays
+ * */
+
+function getThem(theList: number[][]): number[][] {
+  const list1: number[][] = [];
+  for (const x of theList) {
+    if (x[0] == 4) {
+      list1.push(x);
+    }
+  }
+  return list1;
+}
