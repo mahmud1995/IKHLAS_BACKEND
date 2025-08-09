@@ -5,29 +5,6 @@ import {
   MemberType,
 } from "../libs/enums/member.enum";
 
-// Add OAuth fields to your existing MemberType interface
-export interface MemberTypes {
-  _id: Types.ObjectId;
-  memberType: MemberType;
-  memberStatus: MemberStatus;
-  memberEmail: string;
-  memberNickName?: string;
-  memberPhone?: string;
-  memberPassword?: string; // Make optional for OAuth users
-  memberAddress?: string;
-  memberDescription?: string;
-  memberImagePath?: string;
-  memberPoints?: number;
-  createdAt: Date;
-  updatedAt: Date;
-
-  // OAuth fields
-  googleId?: string;
-  githubId?: string;
-  provider?: "local" | "google" | "github";
-  providerId?: string;
-}
-
 const memberSchema = new Schema(
   {
     memberType: {
@@ -94,5 +71,7 @@ const memberSchema = new Schema(
   { timestamps: true } // auto insert updateAt and createdAt to schema
 );
 
-// schema
+// Compound index for OAuth users
+memberSchema.index({ authProvider: 1, googleId: 1 }, { sparse: true });
+// Export Schema model
 export default mongoose.model("Member", memberSchema);
